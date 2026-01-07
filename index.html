@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StayEasy | Hotel Booking India</title>
+    <link rel="stylesheet" href="style.css">
+    
+
+</head>
+
+
+
+<!-- Navbar -->
+<header class="navbar">
+    <div class="logo">StayEasy</div>
+    <nav>
+        <a href="#Hotels">Hotels</a>
+        <a href="#destinations">destinations</a>
+        <a href="#Offers">Offers</a>
+        <a href="#Contact">Contact</a>
+    </nav>
+       <button type="button" class="login-btn" onclick="openLogin()">Login</button>
+
+</header>
+<!-- login form-->
+  <div class="login-modal" id="loginModal">
+    <div class="login-box">
+        <span class="close-btn" onclick="closeLogin()">&times;</span>
+
+        <h2>Login</h2>
+
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+
+        <button onclick="login()">Login</button>
+    </div>
+</div>
+
+
+<!-- Her0 Section -->
+<section id="Hotels" class="hero">
+    <div class="hero-content">
+        <h1>Book Hotels Across India</h1>
+        <p>Best prices. Trusted stays. Easy booking.</p>
+      <div class="search-box">
+       <form class="search-box" action="hotels.html"  method="GET">
+
+        <input
+        type="text"
+        name="city"
+        placeholder="City or Hotel name"
+        required
+        >
+
+        <input
+        type="date"
+        name="checkin"
+        required
+        >
+
+        <input
+        type="date"
+        name="checkout"
+        required
+       >
+
+       <input
+        type="number"
+        name="guests"
+        placeholder="Guests"
+        min="1"
+        required
+      >
+
+      <button type="submit">Search</button>
+
+     </form>
+       <button type="button" onclick="getLocation()">
+        Use My Location
+    </button>
+      <h2 id="resultTitle"></h2>
+
+      <div id="hotelList"></div>
+
+    </div>
+</section>
+
+<!-- POPULAR DESTINATIONS -->
+<section id="destinations">
+    <h2>Popular Destinations</h2>
+
+    <div class="cards">
+        <div class="card">
+            <img src="image/goa" alt="Goa">
+            <span>Goa</span>
+        </div>
+
+        <div class="card">
+            <img src="image/Taj-Mahal-Agra-India.webp" alt="Agra">
+            <span>Agra</span>
+        </div>
+
+        <div class="card">
+            <img src="image/Charminar.jpg" alt="Hyderabad">
+            <span>Hyderabad</span>
+        </div>
+
+        <div class="card">
+            <img src="image/beng" alt="Bangalore">
+            <span>Bangalore</span>
+        </div>
+    </div>
+</section>
+
+<section class="header">
+    <h1>Exclusive Hotel Offers</h1>
+    <p>Save more on your stay across India</p>
+</section>
+
+<!-- OFFERS SECTION -->
+<section id="Offers">
+<div class="offer-card" onclick="applyOffer('GOA_SALE')">
+    
+    <h3>Summer Sale</h3>
+    <p>Book hotels in Goa and get up to 50% discount.</p>
+    <span>Valid till: 30 June</span>
+      <button class="but"><a href="hotels.html?offer=summer"class="a">C
+        
+        lick</a></button>
+
+</div>
+
+<div class="offer-card" onclick="applyOffer('FIRST_BOOKING')">
+    
+    <h3>First Booking Offer</h3>
+    <p>Flat ₹1500 off on your first hotel booking.</p>
+    <span>Use code: FIRSTSTAY</span>
+     <button class="but" ><a href="hotels.html?offer=first_booking
+        " class="a">Click</a></button>
+
+</div>
+
+<div class="offer-card" onclick="applyOffer('WEEKEND')">
+
+    <h3>Weekend Special</h3>
+    <p>Get ₹1000 cashback on weekend stays.</p>
+    <span>Min booking ₹4000</span>
+     <button class="but"><a href="hotels.html?offer=weekend" class="a">Click</a></button>
+
+</div>
+
+<div class="offer-card" onclick="applyOffer('BUSINESS')">
+
+    <h3>Business Travel Offer</h3>
+    <p>Special prices on hotels in Bangalore & Hyderabad.</p>
+    <span>Limited period</span>
+     <button class="but"><a href="hotels.html?offer=business" class="a">Click</a></button>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT SECTION -->
+<section id="Contact" class="contact">
+  <div class="contact-container">
+
+    <div class="contact-info">
+      <h2>Contact Us</h2>
+      <p>Have questions or need help with booking?  
+         Reach out to us anytime.</p>
+
+      <ul>
+        <li>📍 India</li>
+        <li>📞 +91 98765 43210</li>
+        <li>✉ support@stayeasy.in</li>
+      </ul>
+    </div>
+
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <textarea rows="5" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+  </div>
+</section>
+
+
+<!-- FOOTER --->
+<footer class="footer">
+    <p>© 2026 StayEasy. All rights reserved.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
+
+
+
+
