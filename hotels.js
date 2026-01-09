@@ -1,54 +1,53 @@
 // Read offer from URL
 const params = new URLSearchParams(window.location.search);
 const offer = params.get("offer");
-
-// Dummy hotel data
-const hotels = [
-    { name: "StayEasy Goa Resort", city: "Goa", price: 3500 },
-    { name: "Beach View Hotel", city: "Goa", price: 2800 },
-    { name: "City Comfort Delhi", city: "Delhi", price: 3000 },
-    { name: "Business Stay Bangalore", city: "Bangalore", price: 3200 },
-    { name: "Sri Venkateswara Stay", city: "Tirupati", price: 2500 },
-    { name: "Balaji Residency", city: "Tirupati", price: 1800 },
-    { name: "Goa Beach Resort", city: "Goa", price: 3500 },
-    { name: "Hotel Bliss Tirupati", city: "Tirupati", price: 2200},
-    { name: "Pai Viceroy Tirupati", city: "Tirupati", price: 3200},
-    { name: "Hotel PLR Grand",city: "Tirupati",price: 2000}
-];
+const city = params.get("city"); 
 
 const hotelList = document.getElementById("hotelList");
 const title = document.getElementById("resultTitle");
 
-// Change title based on offer
+// Change title
 if (offer === "GOA_SALE") {
     title.textContent = "Goa Hotels – Summer Sale";
-} else if (offer === "FIRST_BOOKING") {
-    title.textContent = "First Booking Special";
-} else if (offer === "WEEKEND") {
-    title.textContent = "Weekend Special Hotels";
-} else if (offer === "BUSINESS") {
-    title.textContent = "Business Travel Hotels";
+} else if (city) {
+    title.textContent = `Hotels in ${city}`;
+} else {
+    title.textContent = "Available Hotels";
 }
 
-// Show hotels
-hotels.forEach(hotel => {
-    const card = document.createElement("div");
-    card.className = "hotel-card";
+//  Backend call
+fetch(`http://127.0.0.1:5000/hotels?city=${city}`)
+    .then(res => res.json())
+    .then(data => {
+        if (data.length === 0) {
+            hotelList.innerHTML = "<p>No hotels found</p>";
+            return;
+        }
 
-    card.innerHTML = `
-        <h3>${hotel.name}</h3>
-        <p>₹${hotel.price} / night</p>
-        <button onclick="bookHotel('${hotel.name}')">
-            Book Now
-        </button>
-    `;
+        data.forEach(hotel => {
+            const card = document.createElement("div");
+            card.className = "hotel-card";
 
-    hotelList.appendChild(card);
-});
+            card.innerHTML = `
+                <h3>${hotel.name}</h3>
+                <p>₹${hotel.price} / night</p>
+                <button onclick="bookHotel('${hotel.name}')">
+                    Book Now
+                </button>
+            `;
+
+            hotelList.appendChild(card);
+        });
+    })
+    .catch(err => {
+        console.error("Backend error:", err);
+        hotelList.innerHTML = "<p>Server error. Try again later.</p>";
+    });
 
 // Booking function
 function bookHotel(hotelName) {
-    window.location.href = `booking.html?hotel=${hotelName}`;
+    window.location.href =
+        `booking.html?hotel=${encodeURIComponent(hotelName)}`;
 }
 
 
